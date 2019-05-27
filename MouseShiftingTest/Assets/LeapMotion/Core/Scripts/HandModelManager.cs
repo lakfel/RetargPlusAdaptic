@@ -115,6 +115,7 @@ namespace Leap.Unity {
        * because the corresponding hand has gone away */
       if (toBeDeleted != null) {
         all_hand_reps.Remove(toBeDeleted.HandID);
+                
         toBeDeleted.Finish();
       }
     }

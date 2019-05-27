@@ -157,11 +157,11 @@ public class OVRCameraRig : MonoBehaviour
 
 		Quaternion emulatedRotation = Quaternion.Euler(-OVRManager.instance.headPoseRelativeOffsetRotation.x, -OVRManager.instance.headPoseRelativeOffsetRotation.y, OVRManager.instance.headPoseRelativeOffsetRotation.z);
 
-		//Note: in the below code, when using UnityEngine's API, we only update anchor transforms if we have a new, fresh value this frame.
-		//If we don't, it could mean that tracking is lost, etc. so the pose should not change in the virtual world.
-		//This can be thought of as similar to calling InputTracking GetLocalPosition and Rotation, but only for doing so when the pose is valid.
-		//If false is returned for any of these calls, then a new pose is not valid and thus should not be updated.
-
+        //Note: in the below code, when using UnityEngine's API, we only update anchor transforms if we have a new, fresh value this frame.
+        //If we don't, it could mean that tracking is lost, etc. so the pose should not change in the virtual world.
+        //This can be thought of as similar to calling InputTracking GetLocalPosition and Rotation, but only for doing so when the pose is valid.
+        //If false is returned for any of these calls, then a new pose is not valid and thus should not be updated.
+        
 		if (hmdPresent)
 		{
 			Vector3 centerEyePosition = Vector3.zero;
@@ -171,12 +171,14 @@ public class OVRCameraRig : MonoBehaviour
 				centerEyeAnchor.localPosition = centerEyePosition;
 			if (OVRNodeStateProperties.GetNodeStatePropertyQuaternion(Node.CenterEye, NodeStatePropertyType.Orientation, OVRPlugin.Node.EyeCenter, OVRPlugin.Step.Render, out centerEyeRotation))
 				centerEyeAnchor.localRotation = centerEyeRotation;
-		}
+            //Debug.Log("CAMERA  --- X:" + centerEyePosition.x + " ---Y:" + centerEyePosition.y + " ---Z:" + centerEyePosition.z);
+
+        }
 		else
 		{
 			centerEyeAnchor.localRotation = emulatedRotation;
 			centerEyeAnchor.localPosition = OVRManager.instance.headPoseRelativeOffsetTranslation;
-		}
+        }
 
 		if (!hmdPresent || monoscopic)
 		{
@@ -230,7 +232,8 @@ public class OVRCameraRig : MonoBehaviour
 
 		trackerAnchor.localPosition = tracker.position;
 
-		OVRPose leftOffsetPose = OVRPose.identity;
+        //Debug.Log("Tracker  --- X:" + tracker.position.x + " ---Y:" + tracker.position.y + " ---Z:" + tracker.position.z);
+        OVRPose leftOffsetPose = OVRPose.identity;
 		OVRPose rightOffsetPose = OVRPose.identity;
 		if (OVRManager.loadedXRDevice == OVRManager.XRDevice.OpenVR)
 		{

@@ -271,7 +271,11 @@ public class SixenseInput : MonoBehaviour
 				{
 					SixensePlugin.sixenseGetNewestData( i, ref cd );
 					m_Controllers[i].Update( ref cd );
-					m_Controllers[i].SetEnabled( true );
+                    // JFGA Printing rotation and positions
+                   // Debug.Log("Positions -- X:" + cd.pos[0] + " -- Y:" + cd.pos[1] + " --- Z:" + cd.pos[2]);Debug.Log("Positions -- X:" + cd.pos[0] + " -- Y:" + cd.pos[1] + " --- Z:" + cd.pos[2]);
+                   // Debug.Log(string.Format("Rotations ---- r1:{0} --- r2:{1} --- r3:{2} --- r4:{3}", cd.rot_quat[0], cd.rot_quat[1], cd.rot_quat[2], cd.rot_quat[3]));
+                    // JFGA Printing rotation and positions
+                    m_Controllers[i].SetEnabled( true );
 					numControllersEnabled++;
 					if ( ControllerManagerEnabled && ( SixenseInput.Controllers[i].Hand != SixenseHands.UNKNOWN ) )
 					{

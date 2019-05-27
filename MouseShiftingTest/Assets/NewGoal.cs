@@ -4,36 +4,31 @@ using UnityEngine;
 
 public class NewGoal : MonoBehaviour
 {
-    public Logic logic;
+    private GameObject master;
+    private MasterController masterController;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(logic == null)
-        {
-            GameObject objectLogic = GameObject.Find("Handle");
-            if(objectLogic != null)
-            {
-                logic = objectLogic.GetComponent<Logic>();
-            }
-            else
-            {
-                Debug.Log("CLASE : New Goal -------------- Imposible to fin Handle object and logic component. Not gonna work :|");            
-
-            }
-        }
+        master = GameObject.Find("Master");
+        masterController = master.GetComponent<MasterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(logic != null)
+        Renderer rend = gameObject.GetComponent<Renderer>();
+        if (Physics.OverlapBox(transform.position, new Vector3(0.1f, 0.1f, 0.1f)).Length == 1)
         {
-            Debug.Log("CLASE : New Goal -------------- Reagoaling|");
-            logic.reGoal();
+            rend.material.color = Color.white;
+            masterController.handOnInitialPosition = false;
+        }
+        else
+        {
+            rend.material.color = Color.green   ;
+            masterController.handOnInitialPosition = true;
         }
     }
+
+   
 }

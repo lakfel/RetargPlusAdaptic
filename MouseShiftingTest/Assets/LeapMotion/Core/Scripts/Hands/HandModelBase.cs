@@ -31,7 +31,7 @@ namespace Leap.Unity {
     public abstract ModelType HandModelType { get; }
     public virtual void InitHand() {
     }
-
+        
     public virtual void BeginHand() {
       if (OnBegin != null) {
         OnBegin();
@@ -60,6 +60,8 @@ namespace Leap.Unity {
     public HandModelManager.ModelGroup group;
 
 #if UNITY_EDITOR
+
+    
     void Update() {
       if (!EditorApplication.isPlaying && SupportsEditorPersistence()) {
         LeapProvider provider = null;
