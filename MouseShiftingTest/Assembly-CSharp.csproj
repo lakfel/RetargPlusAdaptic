@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AxisXYZ.cs" />
     <Compile Include="Assets\CubeTest.cs" />
     <Compile Include="Assets\DefaultCapsuleHand.cs" />
     <Compile Include="Assets\HTC.UnityPlugin\ColliderEvent\ColliderEventCaster.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Assets\HTC.UnityPlugin\VRModule\VRModuleDeviceState.cs" />
     <Compile Include="Assets\HTC.UnityPlugin\VRModule\VRModuleEvent.cs" />
     <Compile Include="Assets\HTC.UnityPlugin\VRModule\VRModuleManager.cs" />
+    <Compile Include="Assets\HydraSettings.cs" />
     <Compile Include="Assets\HydraTester.cs" />
     <Compile Include="Assets\HydraTracker.cs" />
     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />
@@ -380,6 +382,7 @@
     <Compile Include="Assets\Logic.cs" />
     <Compile Include="Assets\MasterController.cs" />
     <Compile Include="Assets\NewGoal.cs" />
+    <Compile Include="Assets\NotificationsMannager.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -673,6 +676,7 @@
     <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseObjectController.cs" />
     <Compile Include="Assets\SixenseInput\Scripts\SixenseInput.cs" />
     <Compile Include="Assets\SixenseInput\Scripts\SixensePlugin.cs" />
+    <Compile Include="Assets\SurveyMannager.cs" />
     <Compile Include="Assets\TargetedController.cs" />
     <Compile Include="Assets\TastePlugin.cs" />
     <Compile Include="Assets\TrackerMannager.cs" />

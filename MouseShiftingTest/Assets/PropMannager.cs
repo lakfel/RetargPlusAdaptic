@@ -20,14 +20,17 @@ public class PropMannager : MonoBehaviour
 
     public static string serialName = @"\\.\COM16";
     public SerialPort mySPort = new SerialPort(serialName, 115200);
-
+    public void openPort()
+    {
+        mySPort.Open();
+        mySPort.ReadTimeout = 10;
+    }
     // Start is called before the first frame update
     void Start()
     {
         try
         {
-            mySPort.Open();
-            mySPort.ReadTimeout = 10;
+            openPort();
         }
         catch(Exception e)
         {
@@ -54,7 +57,18 @@ public class PropMannager : MonoBehaviour
             Debug.Log("3 key was pressed");
             mySPort.Write("<3>");
         }*/
-        
+        try
+        {
+            if (mySPort.CDHolding)
+            { }
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Port closed, re opening");
+            mySPort = new SerialPort(serialName, 115200);
+            openPort();
+        }
+
         if (string.Equals(readData(), "OK"))
             {
                 GameObject tracker1 = GameObject.Find("Tracker1");
@@ -62,9 +76,9 @@ public class PropMannager : MonoBehaviour
                 {
                     HydraTracker hTracker = tracker1.GetComponent<HydraTracker>();
                     if (hTracker != null)
-                    {
-                        hTracker.attach();
-                        Debug.Log("ATTACHING PROP");
+                    {//
+                       // hTracker.attach();
+                       // Debug.Log("ATTACHING PROP");
                         // hTracker.PositionReference = propContr;
                     }
                 }
@@ -75,7 +89,7 @@ public class PropMannager : MonoBehaviour
     public void adapticCommand(PRESET_TYPE type)
     {
         
-        Debug.Log("PropManager ---- Adaptic  " + type.ToString());
+        //Debug.Log("PropManager ---- Adaptic  " + type.ToString());
         if (type == PRESET_TYPE.FLAT)
         {
             mySPort.Write("<1>");
@@ -86,7 +100,7 @@ public class PropMannager : MonoBehaviour
         }
         else if (type == PRESET_TYPE.BOOK)
         {
-            mySPort.Write("<3>");
+            mySPort.Write("<1>");
         }
         mySPort.DiscardOutBuffer();
     }

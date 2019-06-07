@@ -206,7 +206,7 @@ namespace Leap.Unity
 
 
                 drawSphere(getRPosition(palmPosition), _palmRadius);
-                drawSphere(palmPosition, _palmRadius / 10);
+                //drawSphere(palmPosition, _palmRadius / 10);
 
                 //Debug.Log("CONTROLLER   POS///// x:" + palmPosition.x + "///  y:" + palmPosition.y + "///  z:" + palmPosition.z);
 

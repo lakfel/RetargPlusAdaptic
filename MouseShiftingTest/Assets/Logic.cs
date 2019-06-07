@@ -27,27 +27,38 @@ public class Logic : MonoBehaviour
     // Initial point for the hand
     public GameObject initialPoint;
 
+    //Conditions to proceed
+    public bool handOnObject;
+    public bool handOnInitialPosition;
+
 
     // Comunication with the master object
-    private GameObject master;
     private TargetedController targetedController;
     private Logic logic;
     private PersistanceManager persistanceManager;
     private TrackerMannager trackerMannager;
     private MasterController masterController;
-
+    private NotificationsMannager notificationsMannager;
+    private SurveyMannager surveyMannager;
     // Current Propcontroller
     private PropController propContr;
 
     void Start()
     {
 
-        master = GameObject.Find("Master");
-        masterController = master.GetComponent<MasterController>();
-        targetedController = master.GetComponent<TargetedController>();
-        persistanceManager = master.GetComponent<PersistanceManager>();
-        trackerMannager = master.GetComponent<TrackerMannager>();
+        masterController = gameObject.GetComponent<MasterController>();
+        targetedController = gameObject.GetComponent<TargetedController>();
+        persistanceManager = gameObject.GetComponent<PersistanceManager>();
+        trackerMannager = gameObject.GetComponent<TrackerMannager>();
+        notificationsMannager = gameObject.GetComponent<NotificationsMannager>();
+        surveyMannager = gameObject.GetComponent<SurveyMannager>();
+        setNew();
 
+    }
+
+    public void setNew()
+    {
+        handOnObject = false;
         goal = 0;
         for (int i = 0; i < 2; i++)
             props[i].SetActive(false);
@@ -56,7 +67,6 @@ public class Logic : MonoBehaviour
 
         propContr = null;
         triggerPressed = false;
-
     }
 
     // Handle the press of the trigger.
@@ -64,36 +74,45 @@ public class Logic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(!triggerPressed)
-        {
-            if(OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch) > 0.7f)
+        //if (propContr != null)
+          //  Debug.Log("PROP --- Distance to original point --->>  " + propContr.distanceToInitialPoint());
+        if(!surveyMannager.isSurveyActive && !notificationsMannager.masterDecide)
+            if(!triggerPressed)
             {
-                triggerPressed = true;
-                if(masterController.started)
-                    reGoal();
+                if(OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch) > 0.7f)
+                {
+                    triggerPressed = true;
+                    if(masterController.started)
+                        reGoal();
+                }
             }
-        }
-        else
-        {
-            if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch) < 0.7f)
+            else
             {
-                triggerPressed = false;
+                if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch) < 0.7f)
+                {
+                    triggerPressed = false;
+                }
             }
-        }
-        
-
     }
 
 
     private IEnumerator pairTracker(int seconds, PropController controller)
     {
-
+        controller.hydraTracker.detach();
         controller.gameObject.SetActive(true);
         controller.activeChildren(false);
         controller.hydraTracker.PositionReference = controller;
+        if (masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
+        {
+            string result = controller.preSetShape(); // TODO The way to attach the object is still bad.     
+            yield return new WaitForSeconds(3);
+        }
+        else
+        {
+            controller.preSetShape();
+            yield return new WaitForSeconds(0);
+        }
         controller.hydraTracker.attach();
-        yield return new WaitForSeconds(seconds);
         controller.activeChildren(true);
         controller.movePropDock(true);
         controller.objectGreen(false);
@@ -111,112 +130,119 @@ public class Logic : MonoBehaviour
     // When hand in initial position and trigger, movements ends. Stage = -1
     public void reGoal()
     {
-      
-        if(stage == -1)
+        if (conditionsToProceed(stage))
         {
-            initialPoint.SetActive(true);
-            stage = 0;
-        }
-        else if (stage == 0) // Hand in point Zero. Pre. No object to pick. Pos Object showed up initial position.
-        {
-            masterController.handOnObject = false;
-            int nGoal;
-            while ((nGoal = Random.Range(0, 2)) == goal) ; 
-            
-            goal = nGoal;
-            //goal = 0;
-
-            this.propContr = props[goal].GetComponent<PropController>();
-            StartCoroutine(pairTracker(1, this.propContr));
-
-            persistanceManager.trackedObject = this.propContr;
-            if(masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
-            { 
-                string result = this.propContr.preSetShape(); // TODO The way to attach the object is still bad.     
-            }
-
-            
-            //TODO trackers. How mannage 3 trackers. This part should dissapear since all trackers should be in the scene so we should not need to look for the tracker everytime
-           /* GameObject tracker1 = GameObject.Find("Tracker1");
-            if(tracker1 != null)
+            if (stage == -1)
             {
-                HydraTracker hTracker = tracker1.GetComponent<HydraTracker>();
-                if(hTracker != null)
+                initialPoint.SetActive(true);
+                stage = 0;
+            }
+            else if (stage == 0) // Hand in point Zero. Pre. No object to pick. Pos Object showed up initial position.
+            {
+
+                int nGoal;
+                while ((nGoal = Random.Range(0, 2)) == goal) ;
+
+                goal = nGoal;
+                //goal = 0;
+
+                this.propContr = props[goal].GetComponent<PropController>();
+                
+
+
+                //TODO trackers. How mannage 3 trackers. This part should dissapear since all trackers should be in the scene so we should not need to look for the tracker everytime
+                /* GameObject tracker1 = GameObject.Find("Tracker1");
+                 if(tracker1 != null)
+                 {
+                     HydraTracker hTracker = tracker1.GetComponent<HydraTracker>();
+                     if(hTracker != null)
+                     {
+                         //hTracker.attach(propContr);
+                         hTracker.PositionReference = this.propContr;
+                         if (masterController.currentStage != MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
+                         {
+                             hTracker.attach();
+                         }
+
+                     }
+                 }*/
+
+                GameObject PositionReference = propContr.positionReference;
+                targetedController.starShifting(PositionReference.transform.position, capsuleHand.GetLeapHand().PalmPosition.ToVector3()); //Capsulehand has a simplified methos for giving the hand. does not work here?
+                if (masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING || masterController.currentStage == MasterController.EXP_STAGE.PROP_NOT_MATCHING_PLUS_RETARGETING)
                 {
-                    //hTracker.attach(propContr);
-                    hTracker.PositionReference = this.propContr;
-                    if (masterController.currentStage != MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
-                    {
-                        hTracker.attach();
-                    }
-
+                    props[goal].transform.position = targetedController.retargetedPosition.transform.position;
                 }
-            }*/
-
-            GameObject PositionReference = propContr.positionReference;
-            targetedController.starShifting(PositionReference.transform.position, capsuleHand.GetLeapHand().PalmPosition.ToVector3()); //Capsulehand has a simplified methos for giving the hand. does not work here?
-            if (masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING || masterController.currentStage == MasterController.EXP_STAGE.PROP_NOT_MATCHING_PLUS_RETARGETING)
-            {
-                props[goal].transform.position = targetedController.retargetedPosition.transform.position;
-            }
-            else
-            {
-                props[goal].transform.position = PositionReference.transform.position;
-            }
-            //props[goal].SetActive(true);
-            persistanceManager.startDocking(stage);
-            initialPoint.SetActive(false);
-            stage = 1;
-
-        }
-        else if(stage ==1) // Hand in object Maybe should check the coliders are overlapped. Pre No shadow in scene. Pos shadow in point Z
-        {
-            persistanceManager.saveDocking();
-            propContr.dockProp.SetActive(true);
-            persistanceManager.startDocking(stage);
-            stage = 2;
-        }
-        else if (stage == 2) // Object moved in desired position i point Z. Pre Shadow in point Z. Pos shadow in initial position
-        {
-            persistanceManager.saveDocking();
-            propContr.movePropDock(false);
-            persistanceManager.startDocking(stage);
-            stage = 3;
-        }
-        else if (stage == 3) // Object moved to initial position in desired orientation. Pre. Shadow on, initial status off. Pos Shadow off, initial position on
-        {
-            persistanceManager.saveDocking();
-            propContr.dockProp.SetActive(false);
-            initialPoint.SetActive(true);
-            persistanceManager.startDocking(stage);
-            /*
-            GameObject tracker1 = GameObject.Find("Tracker1");
-            if (tracker1 != null)
-            {
-                HydraTracker hTracker = tracker1.GetComponent<HydraTracker>();
-                if (hTracker != null)
+                else
                 {
-                    //hTracker.attach(propContr);
-                    hTracker.PositionReference = this.propContr;
-                    if (masterController.currentStage != MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
-                    {
-                        hTracker.detach();
-                    }
-
+                    props[goal].transform.position = PositionReference.transform.position;
                 }
-            }
-            */
-            propContr.hydraTracker.detach();
-            propContr.gameObject.SetActive(false);
+                StartCoroutine(pairTracker(1, this.propContr));
 
-            stage = 4;
-        }
-        else if (stage == 4) // Hand moves to point z
-        {
-            persistanceManager.saveDocking();
-            persistanceManager.startDocking(stage);
-            initialPoint.SetActive(false);
-            stage = -1;
+                persistanceManager.trackedObject = this.propContr;
+                //props[goal].SetActive(true);
+                persistanceManager.startDocking(stage);
+                initialPoint.SetActive(false);
+                stage = 1;
+
+            }
+            else if (stage == 1) // Hand in object Maybe should check the coliders are overlapped. Pre No shadow in scene. Pos shadow in point Z
+            {
+                persistanceManager.saveDocking();
+                propContr.dockProp.SetActive(true);
+                persistanceManager.startDocking(stage);
+                stage = 2;
+            }
+            else if (stage == 2) // Object moved in desired position i point Z. Pre Shadow in point Z. Pos shadow in initial position
+            {
+                persistanceManager.saveDocking();
+                propContr.movePropDock(false);
+                persistanceManager.startDocking(stage);
+                stage = 3;
+            }
+            else if (stage == 3) // Object moved to initial position in desired orientation. Pre. Shadow on, initial status off. Pos Shadow off, initial position on
+            {
+                persistanceManager.saveDocking();
+                propContr.dockProp.SetActive(false);
+                initialPoint.SetActive(true);
+                persistanceManager.startDocking(stage);
+                /*
+                GameObject tracker1 = GameObject.Find("Tracker1");
+                if (tracker1 != null)
+                {
+                    HydraTracker hTracker = tracker1.GetComponent<HydraTracker>();
+                    if (hTracker != null)
+                    {
+                        //hTracker.attach(propContr);
+                        hTracker.PositionReference = this.propContr;
+                        if (masterController.currentStage != MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
+                        {
+                            hTracker.detach();
+                        }
+
+                    }
+                }
+                */
+
+                capsuleHand.canDraw = true;
+                propContr.hydraTracker.detach();
+                propContr.gameObject.SetActive(false);
+
+                stage = 4;
+            }
+            else if (stage == 4) // Hand moves to point z
+            {
+                persistanceManager.saveDocking();
+                persistanceManager.startDocking(stage);
+                initialPoint.SetActive(false);
+                capsuleHand.canDraw = true;
+                stage = -1;
+                propContr.hydraTracker.detach();
+                if (propContr.angleNumber == 5)
+                    notificationsMannager.registerGoal();
+            }
+
+            notificationsMannager.lightStepNotification(stage + 2);
         }
     }
 
@@ -240,5 +266,54 @@ public class Logic : MonoBehaviour
     {
         Thread.Sleep(2000);
     }
+
+    public bool conditionsToProceed(int stage)
+    {
+        bool answer = true;
+        if (stage == 0) // The hand must be touchin point zero;
+        {
+            answer = handOnInitialPosition;
+            if(!answer)
+            {
+                notificationsMannager.messageToUser("Be sure your hand is on the sphere");
+            }
+        }
+        else if (stage == 1)
+        {
+            answer = handOnObject && (propContr.distanceToInitialPoint() < 0.09f);
+
+            if (!answer)
+            {
+                notificationsMannager.messageToUser("Be sure your hands is on the object. \n Do not move it");
+            }
+        }
+        else if (stage == 2)
+        {
+            answer = propContr.distanceToDock() < 0.08f;
+            if (!answer)
+            {
+                notificationsMannager.messageToUser(@"It seems you are not in the final position");
+            }
+        }
+        else if (stage == 3)
+        {
+            answer = propContr.distanceToDock() < 0.08f;
+            if (!answer)
+            {
+                notificationsMannager.messageToUser(@"It seems you are not in the final position");
+            }
+        }
+        else if (stage == 4)
+        {
+            answer = handOnInitialPosition;
+            if (!answer)
+            {
+                notificationsMannager.messageToUser("Be sure your hand is on the sphere");
+            }
+        }
+
+        return answer;
+    }
+
 
 }

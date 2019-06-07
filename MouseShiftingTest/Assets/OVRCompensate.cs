@@ -10,7 +10,7 @@ public class OVRCompensate : MonoBehaviour
     public Vector3 LeftTracker;
     public Vector3 RightTracker;
 
-    private bool Configured;
+    public bool Configured;
 
     public Transform VRCamHolder; //parent of the cam
     public float WaitBeforeCompensation = 0.5f;
@@ -26,7 +26,7 @@ public class OVRCompensate : MonoBehaviour
     }
     private void Update()
     {
-        if(!Configured || true)
+        if(!Configured )
         {
             for (int i = 0; i <= OVRManager.tracker.count ; i++)
             {
@@ -39,6 +39,7 @@ public class OVRCompensate : MonoBehaviour
                         transform.position = RightTracker -  OVRManager.tracker.GetPose(i).position  + GameObject.Find("MiddlePositionConfiguration").transform.position;
                 }
                 OVRPose tp = OVRManager.tracker.GetPose(i);
+                
                 //Debug.Log("TRACKER " + i + " -> " + OVRManager.tracker.GetPoseValid(i) + "->X:" + tp.position.x + " **  Y:" + tp.position.y + " **  Z:" + tp.position.z);
             }
            

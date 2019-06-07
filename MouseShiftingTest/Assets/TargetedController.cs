@@ -83,7 +83,7 @@ public class TargetedController : MonoBehaviour
                 float zAnchor = (realPosition.z - startPosition.z) * movementFactor;
 
                 rePosition = new Vector3(xAnchor + zAnchor * compensationFactorX + startPosition.x, yAnchor + startPosition.y, zAnchor * compensationFactorZ + startPosition.z);
-                Debug.Log("RETARGETTING ");
+                //Debug.Log("RETARGETTING ");
             }
         }
 
