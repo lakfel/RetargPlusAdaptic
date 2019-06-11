@@ -3879,7 +3879,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b67dbbc469d1874782a62074d2c0c95, type: 2}
+  - {fileID: 2100000, guid: c6fcbfcfe1df15b43b3652041fe2b40c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3922,7 +3922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &931530368
 Transform:
   m_ObjectHideFlags: 0
@@ -4122,7 +4122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surveyActivated: 0
   started: 0
-  subjectOrder: 3
+  subjectOrder: 0
   notificacionTextObject: {fileID: 116335514}
   stageCounter: 0
   currentStage: 0
@@ -8660,7 +8660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LeftTracker: {x: -0.44, y: 0.21, z: 0.15}
-  RightTracker: {x: 0.53, y: 0.21, z: 0.15}
+  RightTracker: {x: 0.56, y: 0.23, z: 0.15}
   Configured: 0
   VRCamHolder: {fileID: 0}
   WaitBeforeCompensation: 0.5

@@ -152,13 +152,19 @@ public class PropController : MonoBehaviour
 
         if (logic.stage == 1 || logic.stage == 3)
         {
-            objectGreen(nOverlapped);
+            
             if (logic.stage == 3)
-                capsuleHand.canDraw = !nOverlapped;
+            {
+                capsuleHand.canDraw = false;
+                objectGreen(true);
+            }
             else
+            {
+                objectGreen(nOverlapped);
                 capsuleHand.canDraw = true;
+            }
             logic.handOnObject = nOverlapped;
-            if(nOverlapped && logic.stage == 1)
+            if( logic.stage == 1)
             {
                 if(Vector3.Distance(transform.position, positionReference.transform.position) > 0.05)
                 {

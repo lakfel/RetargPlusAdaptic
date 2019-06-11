@@ -280,7 +280,7 @@ public class Logic : MonoBehaviour
         }
         else if (stage == 1)
         {
-            answer = handOnObject && (propContr.distanceToInitialPoint() < 0.09f);
+            answer =  (propContr.distanceToInitialPoint() < 0.09f);
 
             if (!answer)
             {

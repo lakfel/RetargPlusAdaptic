@@ -29,8 +29,8 @@ public class TrackerMannager : MonoBehaviour
     {
         if(masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING || masterController.currentStage == MasterController.EXP_STAGE.PROP_NOT_MATCHING_PLUS_RETARGETING)
         {
-            leftProp.hydraTracker = rightTracker;
-            rightProp.hydraTracker = rightTracker;
+            leftProp.hydraTracker = leftTracker;
+            rightProp.hydraTracker = leftTracker;
         }
         else
         {
