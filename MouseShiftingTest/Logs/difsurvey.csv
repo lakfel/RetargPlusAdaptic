@@ -128,3 +128,38 @@ ID_TRIAL;TIME_STAMP;PREV_STAGE;CURR_STAGE;QUESTION;ANSWER
 190611124822;13:34:27 11-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);2
 190611124822;13:39:57 11-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);4
 190611124822;13:40:04 11-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);4
+190611172217;17:57:44 11-06-19;;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);7
+190611172217;18:04:00 11-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);5
+190611172217;18:04:06 11-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);5
+190611172217;18:08:49 11-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);6
+190611172217;18:08:54 11-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);6
+190611172217;18:12:35 11-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);6
+190611172217;18:12:40 11-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);7
+190611184514;19:05:30 11-06-19;;PROP_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);5
+190611184514;19:12:38 11-06-19;PROP_MATCHING_NO_RETARGETING;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);6
+190611184514;19:12:48 11-06-19;PROP_MATCHING_NO_RETARGETING;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);6
+190611184514;19:18:44 11-06-19;PROP_NOT_MATCHING_NO_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);7
+190611184514;19:18:47 11-06-19;PROP_NOT_MATCHING_NO_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);7
+190611184514;19:25:52 11-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);4
+190611184514;19:25:54 11-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);4
+190611193444;19:49:51 11-06-19;;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);5
+190611193444;19:59:25 11-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);4
+190611193444;19:59:35 11-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);6
+190611193444;20:08:41 11-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);3
+190611193444;20:08:48 11-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);2
+190611193444;20:14:38 11-06-19;PROP_NOT_MATCHING_NO_RETARGETING;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);6
+190611193444;20:14:43 11-06-19;PROP_NOT_MATCHING_NO_RETARGETING;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);6
+190612124746;13:29:59 12-06-19;;PROP_NOT_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);5
+190612124746;13:36:25 12-06-19;PROP_NOT_MATCHING_NO_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);6
+190612124746;13:36:42 12-06-19;PROP_NOT_MATCHING_NO_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);4
+190612124746;13:43:38 12-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);5
+190612124746;13:43:45 12-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);4
+190612124746;13:54:21 12-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);3
+190612124746;13:54:26 12-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);3
+190612163242;16:38:09 12-06-19;;PROP_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);4
+190612163242;16:44:37 12-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);4
+190612163242;16:44:49 12-06-19;PROP_MATCHING_PLUS_RETARGETING;PROP_NOT_MATCHING_PLUS_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);4
+190612163242;16:50:58 12-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);5
+190612163242;16:51:02 12-06-19;PROP_NOT_MATCHING_PLUS_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);5
+190612163242;16:59:26 12-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, how easy was to accomplish the task? (1 Very hard - 7 Very easy);4
+190612163242;16:59:34 12-06-19;PROP_MATCHING_NO_RETARGETING;PROP_MATCHING_NO_RETARGETING;From 1 to 7, Compared to the previous stage  how easier was to accomplish the task?  (1 Much harder - 7 Much easier);4

@@ -4122,7 +4122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surveyActivated: 0
   started: 0
-  subjectOrder: 0
+  subjectOrder: 1
   notificacionTextObject: {fileID: 116335514}
   stageCounter: 0
   currentStage: 0
@@ -8283,7 +8283,7 @@ MonoBehaviour:
   reatach: 0
   realWorldReference: {fileID: 2144958833}
   m_sensitivity: 0.001
-  orientation: 1
+  orientation: -1
   trackerOffset: {x: -0.2, y: 0, z: 0}
   m_sensitivityX: 0.0013
   m_sensitivityY: 0.0013
