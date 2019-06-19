@@ -184,10 +184,37 @@ void loop() {
         {
           presetBook();
         }
+        input = "OK";
+
+        delay(1000);
+        Serial.println(input);
+        delay(1000);
+        Serial.flush();
       }
       else if( mode == 3)
       {
-        
+        moveMotor(pos00, pos01);
+      }
+      else if( mode == 4)
+      {
+        if(action ==1)
+        {
+          presetFlatSlow();
+        }
+        else if(action ==2)
+        {
+          presetCylinderSlow();
+        }
+        else if(action ==3)
+        {
+          presetBookSlow();
+        }
+        input = "OK";
+
+        delay(1000);
+        Serial.println(input);
+        delay(1000);
+        Serial.flush();
       }
     }
   }
@@ -240,7 +267,7 @@ void loop() {
     }
   }
 */
-  input += "&";
+input += "&";
 
   input += String(Aread00);
   input += ",";
@@ -296,6 +323,19 @@ void loop() {
 
 }
 
+
+/* Detach only one motor per joint, in order to mantain the adaptic rigid but avoiding consume too much current
+ */
+void detachHalf()
+{
+  myservo11.detach();
+  myservo09.detach();
+  myservo07.detach();
+  myservo05.detach();
+  myservo03.detach();
+  myservo01.detach(); 
+}
+
 /**
  * Preset flat shape
  */
@@ -304,26 +344,63 @@ void presetFlat ()
   detachJoint(1);
   detachJoint(2);
   detachJoint(3);
-  detachJoint(4);
+//detachJoint(4);
   detachJoint(5);
   detachJoint(6);
 
   moveJoint(1,90);
   moveJoint(2,90);
-  moveJoint(3,90);
-  moveJoint(4,90);
+ moveJoint(3,90);
+ // moveJoint(4,90);
   moveJoint(5,90);
   moveJoint(6,90);
   
 
   delay(500);
+   detachHalf();
+  detachJoint(1);
+  detachJoint(2);
+ detachJoint(3);
+ // detachJoint(4);
+  detachJoint(5);
+  detachJoint(6);
   
+}
+
+void presetFlatSlow ()
+{
   detachJoint(1);
   detachJoint(2);
   detachJoint(3);
-  detachJoint(4);
+//detachJoint(4);
   detachJoint(5);
   detachJoint(6);
+
+  moveJoint(1,90);
+  moveJoint(2,90);
+  delay(300);
+  detachJoint(1);
+  detachJoint(2);
+  delay(600);
+  moveJoint(3,90);
+  moveJoint(5,90);
+  delay(300);
+  detachJoint(3);
+ // moveJoint(4,90);
+  detachJoint(5);
+  delay(600);
+  moveJoint(6,90);
+  delay(300);
+  detachJoint(6);
+  
+
+ /* delay(500);
+   detachHalf();
+  detachJoint(2);
+ detachJoint(3);
+ // detachJoint(4);
+  detachJoint(5);
+  detachJoint(6);*/
   
 }
 
@@ -335,25 +412,67 @@ void presetCylinder ()
   detachJoint(1);
   detachJoint(2);
   detachJoint(3);
-  detachJoint(4);
+ // detachJoint(4);
   detachJoint(5);
   detachJoint(6);
 
   moveJoint(1,40);
   moveJoint(2,40);
   moveJoint(3,40);
-  moveJoint(4,40);
+ // moveJoint(4,40);
   moveJoint(5,40);
   moveJoint(6,40);
   
   delay(500);
 
+  //detachHalf();
+  
   detachJoint(1);
   detachJoint(2);
   detachJoint(3);
-  detachJoint(4);
+ // detachJoint(4);
   detachJoint(5);
   detachJoint(6);
+  
+}
+
+void presetCylinderSlow ()
+{
+  detachJoint(1);
+  detachJoint(2);
+  detachJoint(3);
+ // detachJoint(4);
+  detachJoint(5);
+  detachJoint(6);
+
+  moveJoint(1,40);
+  moveJoint(2,40);
+  delay(300);
+  detachJoint(1);
+  detachJoint(2);
+  delay(900);
+  moveJoint(3,40);
+  
+  delay(300);
+
+  detachJoint(3);
+  
+  delay(900);
+  
+  moveJoint(4,40);
+  delay(300);
+  detachJoint(4);
+  
+  delay(900);
+  
+  moveJoint(5,40);
+  moveJoint(6,80);
+  delay(300);
+
+  //detachHalf();
+  
+  detachJoint(6);
+  detachJoint(5);
   
 }
 
@@ -365,28 +484,69 @@ void presetBook()
   detachJoint(1);
   detachJoint(2);
   detachJoint(3);
-  detachJoint(4);
+ // detachJoint(4);
   detachJoint(5);
   detachJoint(6);
 
   moveJoint(1,0);
   moveJoint(2,0);
   moveJoint(3,90);
-  moveJoint(4,90);
+ // moveJoint(4,90);
   moveJoint(5,0);
   moveJoint(6,0);
 
   delay(500);
  
+  //detachHalf();
+  
   detachJoint(1);
   detachJoint(2);
   detachJoint(3);
-  detachJoint(4);
+ // detachJoint(4);
   detachJoint(5);
   detachJoint(6);
-  
+    
 }
 
+/**
+ * Preset book  shape
+ */
+void presetBookSlow()
+{
+  detachJoint(1);
+  detachJoint(2);
+  detachJoint(3);
+ // detachJoint(4);
+  detachJoint(5);
+  detachJoint(6);
+
+  moveJoint(1,0);
+  moveJoint(2,0);
+  delay(300);
+  detachJoint(1);
+  detachJoint(2);
+  delay(600);
+  
+  moveJoint(3,90);
+  moveJoint(4,90);
+  delay(300);
+  detachJoint(3);
+  detachJoint(4);
+  delay(600);
+
+  
+  moveJoint(5,0);
+  moveJoint(6,0);
+
+  delay(500);
+ 
+  //detachHalf();
+  
+
+  detachJoint(5);
+  detachJoint(6);
+    
+}
 
 void moveMotor(int motor, float angle)
 {
@@ -460,12 +620,12 @@ void moveJoint(int joint, float angle)
     myservo03.attach(3);
     myservo02.attach(2);
     myservo03.write(min(max(180 - angle,16),169));
-    myservo02.write(min(max(angle,16),169));
+    myservo02.write(min(max(180 - angle,16),169));
   }
   if(joint == 5)
   {
     myservo05.attach(5);
-    myservo04.attach(4);
+    myservo04.attach(4);  
     myservo05.write(min(max(180 - angle,16),169));
     myservo04.write(min(max(180 - angle,16),169));
   }
