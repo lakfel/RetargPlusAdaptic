@@ -27,7 +27,8 @@ public class TrackerMannager : MonoBehaviour
 
     public void setTrackers()
     {
-        if(masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING || masterController.currentStage == MasterController.EXP_STAGE.PROP_NOT_MATCHING_PLUS_RETARGETING)
+        masterController = gameObject.GetComponent<MasterController>();
+        if (masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING || masterController.currentStage == MasterController.EXP_STAGE.PROP_NOT_MATCHING_PLUS_RETARGETING)
         {
             leftProp.hydraTracker = leftTracker;
             rightProp.hydraTracker = leftTracker;

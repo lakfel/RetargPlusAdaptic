@@ -18,16 +18,21 @@ public class PropMannager : MonoBehaviour
         BOOK
     };
 
+    private MasterController masterController;
+
     public static string serialName = @"\\.\COM16";
     public SerialPort mySPort = new SerialPort(serialName, 115200);
     public void openPort()
     {
         mySPort.Open();
         mySPort.ReadTimeout = 10;
+        if(masterController.isDemo)
+            mySPort.Write("<-99,4>");
     }
     // Start is called before the first frame update
     void Start()
     {
+        masterController = GameObject.Find("Master").GetComponent<MasterController>();
         try
         {
             openPort();

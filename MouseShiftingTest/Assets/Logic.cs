@@ -105,7 +105,10 @@ public class Logic : MonoBehaviour
         if (masterController.currentStage == MasterController.EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING)
         {
             string result = controller.preSetShape(); // TODO The way to attach the object is still bad.     
-            yield return new WaitForSeconds(3);
+            if(!masterController.isDemo)
+                yield return new WaitForSeconds(3);
+            if (masterController.isDemo)
+                yield return new WaitForSeconds(5);
         }
         else
         {
@@ -238,8 +241,9 @@ public class Logic : MonoBehaviour
                 capsuleHand.canDraw = true;
                 stage = -1;
                 propContr.hydraTracker.detach();
-                if (propContr.angleNumber == 5)
-                    notificationsMannager.registerGoal();
+                if(!masterController.isDemo)
+                    if (propContr.angleNumber == 2) 
+                        notificationsMannager.registerGoal();
             }
 
             notificationsMannager.lightStepNotification(stage + 2);

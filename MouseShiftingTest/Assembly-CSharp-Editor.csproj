@@ -158,6 +158,8 @@
     <Compile Include="Assets\Oculus\Spatializer\Editor\ONSPPropagationGeometryEditor.cs" />
     <Compile Include="Assets\Oculus\Spatializer\Editor\ONSPPropagationMaterialEditor.cs" />
     <Compile Include="Assets\Oculus\Spatializer\Editor\ONSPReflectionCustomGUI.cs" />
+    <Compile Include="Assets\RockVR\Video\Editor\VideoCaptureEditor.cs" />
+    <Compile Include="Assets\RockVR\Video\Editor\VideoCaptureMenuEditor.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/johannavila/Documents/Projects/HCIProjektGlove/hciprojektglove/MouseShiftingTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -793,6 +795,18 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{19D4F6E4-DDC6-BBEC-B5E4-A449D7ABBAA8}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Editor.csproj">
+      <Project>{9A308CBC-560B-AB8D-2BCE-9071943C9157}</Project>
+      <Name>Unity.Recorder.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{FD6E4D55-AF30-54CA-2CCE-4F80730481BA}</Project>
+      <Name>Unity.Recorder</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Samples.csproj">
+      <Project>{0F50A67C-1914-B5C2-B085-3D953E611AE9}</Project>
+      <Name>Unity.Recorder.Samples</Name>
     </ProjectReference>
     <ProjectReference Include="Oculus.VR.Editor.csproj">
       <Project>{141B9E5A-0D24-CA72-6438-7960251F6017}</Project>

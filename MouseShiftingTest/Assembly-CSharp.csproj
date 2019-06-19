@@ -670,6 +670,22 @@
     <Compile Include="Assets\PropMannager.cs" />
     <Compile Include="Assets\PropSpecs.cs" />
     <Compile Include="Assets\PropsTrackerManager.cs" />
+    <Compile Include="Assets\RockVR\Common\Scripts\EventDelegate.cs" />
+    <Compile Include="Assets\RockVR\Common\Scripts\FPSDisplay.cs" />
+    <Compile Include="Assets\RockVR\Common\Scripts\Platform.cs" />
+    <Compile Include="Assets\RockVR\Common\Scripts\Process.cs" />
+    <Compile Include="Assets\RockVR\Common\Scripts\Singleton.cs" />
+    <Compile Include="Assets\RockVR\Video\Demo\Scripts\AutoRotate.cs" />
+    <Compile Include="Assets\RockVR\Video\Demo\Scripts\VideoCaptureUI.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\AudioCapture.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Base\VideoCaptureBase.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Base\VideoCaptureCtrlBase.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Config.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Screenshot.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\Utils\Utils.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\VideoCapture.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\VideoCaptureCtrl.cs" />
+    <Compile Include="Assets\RockVR\Video\Scripts\VideoPlayer.cs" />
     <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseHand.cs" />
     <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseHandsController.cs" />
     <Compile Include="Assets\SixenseInput\DemoScenes\Scripts\SixenseInputTest.cs" />
@@ -685,8 +701,10 @@
     <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_PC_SingleComponent.shader" />
     <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
+    <None Include="Assets\RockVR\Video\Shaders\DownsamplePro.shader" />
     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Materials\Hands_DiffBump.shader" />
     <None Include="Assets\Oculus\SampleFramework\Usage\Locomotion\Shaders\TriPlanarWorld.shader" />
+    <None Include="Assets\RockVR\Video\Shaders\Cubemap2Equirectangular.shader" />
     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Materials\Hands_Transparent.shader" />
     <None Include="Assets\HTC.UnityPlugin\ViveInputUtility\Resources\Unlit-AlphaWithFade.shader" />
     <None Include="Assets\LeapMotion\Core\readme.txt" />
@@ -695,9 +713,13 @@
     <None Include="Assets\LeapMotion\Core\Shaders\RuntimeGizmos.shader" />
     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Shaders\Hands_02.shader" />
     <None Include="Assets\Oculus\Avatar\Content\Materials\AvatarSurfaceShaderSelfOccluding.shader" />
+    <None Include="Assets\RockVR\Video\Shaders\CubemapDisplayPro.shader" />
     <None Include="Assets\LeapMotion\Core\Dependencies.txt" />
+    <None Include="Assets\RockVR\Video\Shaders\Cubemap2EquirectangularPro.shader" />
+    <None Include="Assets\RockVR\Video\Shaders\CubemapToCylindrical.shader" />
     <None Include="Assets\LeapMotion\Core\Shaders\ThresholdOverlay.shader" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderSelfOccluding.shader" />
+    <None Include="Assets\RockVR\Video\Shaders\FlippingTexture.shader" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderPBS.shader" />
     <None Include="Assets\Oculus\Avatar\Samples\SocialStarter\README.txt" />
     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughForeground.shader" />
@@ -712,6 +734,8 @@
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderPBSV2.shader" />
     <None Include="Assets\LeapMotion\Core\Version.txt" />
     <None Include="Assets\LeapMotion\Core\Shaders\VertexOffsetShader.shader" />
+    <None Include="Assets\RockVR\Video\Shaders\Stereoscopic.shader" />
+    <None Include="Assets\RockVR\Video\Shaders\CopyReverse.shader" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_Mobile_SingleComponent.shader" />
     <None Include="Assets\Oculus\SampleFramework\Core\Locomotion\Materials\ColumnGlow.shader" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarMaterialStateShader.cginc" />
@@ -1302,6 +1326,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Recorder.Editor.csproj">
+      <Project>{9A308CBC-560B-AB8D-2BCE-9071943C9157}</Project>
+      <Name>Unity.Recorder.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{FD6E4D55-AF30-54CA-2CCE-4F80730481BA}</Project>
+      <Name>Unity.Recorder</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Samples.csproj">
+      <Project>{0F50A67C-1914-B5C2-B085-3D953E611AE9}</Project>
+      <Name>Unity.Recorder.Samples</Name>
+    </ProjectReference>
     <ProjectReference Include="Oculus.VR.Editor.csproj">
       <Project>{141B9E5A-0D24-CA72-6438-7960251F6017}</Project>
       <Name>Oculus.VR.Editor</Name>

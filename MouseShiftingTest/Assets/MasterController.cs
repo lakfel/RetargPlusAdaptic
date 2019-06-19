@@ -5,7 +5,7 @@ using UnityEngine;
 public class MasterController : MonoBehaviour
 {
 
-
+    public bool isDemo;
     private PersistanceManager persistanceManager;
     private TrackerMannager trackerMannager;
     private NotificationsMannager notificationsMannager;
@@ -53,7 +53,26 @@ public class MasterController : MonoBehaviour
         logic = gameObject.GetComponent<Logic>();
 
         surveyActivated = false;
-        setNew();
+
+        if(!isDemo)
+            setNew();
+        else
+        {
+            currentStage = EXP_STAGE.PROP_MATCHING_PLUS_RETARGETING;
+            notificationsMannager.lightStepNotification(1);
+            started = true;
+            if (notificacionTextObject != null)
+            {
+                TextMesh text = notificacionTextObject.GetComponent<TextMesh>();
+                text.text = "Welcome!!";
+            }
+            if(persistanceManager != null)
+            {
+                persistanceManager.storeLocal = false;
+                persistanceManager.storeInForms = false;
+            }
+            trackerMannager.setTrackers();
+        }
 
         
 
@@ -91,52 +110,53 @@ public class MasterController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        //if(OVRInput.GetDown(OVRInput.Button.One))
-        {
-
-
-            if (!started)
+        if(!isDemo)
+            if (Input.GetKeyDown(KeyCode.Space))
+            //if(OVRInput.GetDown(OVRInput.Button.One))
             {
-                started = true;
 
-                currentStage = EXP_STAGE.TUTORIAL;
-                stagesDone[0] = true;
 
-                notificationsMannager.lightStepNotification(1);
-
-                if (notificacionTextObject != null)
+                if (!started)
                 {
-                    TextMesh text = notificacionTextObject.GetComponent<TextMesh>();
-                    text.text = "TUTORIAL";
+                    started = true;
+
+                    currentStage = EXP_STAGE.TUTORIAL;
+                    stagesDone[0] = true;
+
+                    notificationsMannager.lightStepNotification(1);
+
+                    if (notificacionTextObject != null)
+                    {
+                        TextMesh text = notificacionTextObject.GetComponent<TextMesh>();
+                        text.text = "TUTORIAL";
+                    }
+
+                    if (persistanceManager != null)
+                        persistanceManager.saveGeneral();
+                    else
+                        Debug.LogError("PersistanceMannager missing!!! No results reported");
+                    //Call persistance to update
                 }
-
-                if (persistanceManager != null)
-                    persistanceManager.saveGeneral();
                 else
-                    Debug.LogError("PersistanceMannager missing!!! No results reported");
-                //Call persistance to update
+                    nextStage();
+
+                trackerMannager.setTrackers();
             }
-            else
-                nextStage();
+            else if (Input.GetKeyDown(KeyCode.R))
+            {
+                setNew();
+                notificationsMannager.normalSettings();
+                persistanceManager.recording = false;
 
-            trackerMannager.setTrackers();
-        }
-        else if (Input.GetKeyDown(KeyCode.R))
-        {
-            setNew();
-            notificationsMannager.normalSettings();
-            persistanceManager.recording = false;
+                GameObject leftProp = GameObject.Find("LeftProp");
+                if (leftProp != null)
+                    leftProp.GetComponent<PropController>().angleNumber = 0;
 
-            GameObject leftProp = GameObject.Find("LeftProp");
-            if (leftProp != null)
-                leftProp.GetComponent<PropController>().angleNumber = 0;
+                GameObject rightProp = GameObject.Find("RightProp");
+                if (rightProp != null)
+                    rightProp.GetComponent<PropController>().angleNumber = 0;
 
-            GameObject rightProp = GameObject.Find("RightProp");
-            if (rightProp != null)
-                rightProp.GetComponent<PropController>().angleNumber = 0;
-
-        }
+            }
     }
 
     public void nextStage()
